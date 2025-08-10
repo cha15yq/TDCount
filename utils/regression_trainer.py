@@ -100,8 +100,8 @@ class Reg_Trainer(Trainer):
             self.train_epoch()
             if self.epoch >= args.start_val and self.epoch % args.val_epoch == 0:
                 game0_is_best, game3_is_best = self.val_epoch()
-                # if epoch >= args.start_val and (game0_is_best or game3_is_best):
-                #     self.test_epoch()
+                if epoch >= args.start_val and (game0_is_best or game3_is_best):
+                    self.test_epoch()
 
     def train_epoch(self):
         epoch_reg_loss = AverageMeter()
@@ -204,11 +204,11 @@ class Reg_Trainer(Trainer):
                 relative_error = eval_relative(pred_den, target)
                 total_relative_error += relative_error
 
-        N = len(self.dataloaders['test'])
+        N = len(self.dataloaders['val'])
         game = [m / N for m in game]
         mse = [torch.sqrt(m / N) for m in mse]
         total_relative_error = total_relative_error / N
-        logging.info('Epoch {} Test{}, '
+        logging.info('Epoch {} Val{}, '
                      'GAME0 {game0:.2f} GAME1 {game1:.2f} GAME2 {game2:.2f} GAME3 {game3:.2f} MSE {mse:.2f} Re {relative:.4f}, Time cost {time_cost:.1f}s'
                      .format(self.epoch, N, game0=game[0], game1=game[1], game2=game[2], game3=game[3], mse=mse[0],
                              relative=total_relative_error, time_cost=time.time() - epoch_start
@@ -234,34 +234,6 @@ class Reg_Trainer(Trainer):
             self.model.depth_feat.pipeline.unet.save_pretrained(best_unet_dir)
         return game0_is_best, game3_is_best
 
-    def test_epoch(self):
-        epoch_start = time.time()
-        self.model.eval()
-        game = [0, 0, 0, 0]
-        mse = [0, 0, 0, 0]
-        total_relative_error = 0
-        for rgb_inputs, rgb_d_inputs, target, name in self.dataloaders['test']:
-            rgb_inputs = rgb_inputs.to(self.device)
-            rgb_d_inputs = rgb_d_inputs.to(self.device)
-            target = target.to(self.device)
-            with torch.set_grad_enabled(False):
-                pred_den = self.model(rgb_inputs, rgb_d_inputs)
-                for L in range(4):
-                    abs_error, square_error = eval_game(pred_den, target, L)
-                    game[L] += abs_error
-                    mse[L] += square_error
-                relative_error = eval_relative(pred_den, target)
-                total_relative_error += relative_error
-
-        N = len(self.dataloaders['val'])
-        game = [m / N for m in game]
-        mse = [torch.sqrt(m / N) for m in mse]
-        total_relative_error = total_relative_error / N
-        logging.info('Epoch {} Val {}, '
-                     'GAME0 {game0:.2f} GAME1 {game1:.2f} GAME2 {game2:.2f} GAME3 {game3:.2f} MSE {mse:.2f} Re {relative:.4f}, Time cost {time_cost:.1f}s'
-                     .format(self.epoch, N, game0=game[0], game1=game[1], game2=game[2], game3=game[3], mse=mse[0],
-                             relative=total_relative_error, time_cost=time.time() - epoch_start)
-                     )
 
 
 def get_reg_loss(pred, gt, threshold=1e-3, level=3, window_size=3):
