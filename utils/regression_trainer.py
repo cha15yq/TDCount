@@ -176,7 +176,7 @@ class Reg_Trainer(Trainer):
         game = [0, 0, 0, 0]
         mse = [0, 0, 0, 0]
         total_relative_error = 0
-        for thermal_inputs, thermal_d_inputs, target, name, token_ids in self.dataloaders['test']:
+        for thermal_inputs, thermal_d_inputs, target, name, token_ids in self.dataloaders['val']:
             thermal_inputs = thermal_inputs.to(self.device)
             thermal_d_inputs = thermal_d_inputs.to(self.device)
             target = target.to(self.device)
