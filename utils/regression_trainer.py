@@ -100,8 +100,8 @@ class Reg_Trainer(Trainer):
             self.train_epoch()
             if self.epoch >= args.start_val and self.epoch % args.val_epoch == 0:
                 game0_is_best, game3_is_best = self.val_epoch()
-                if epoch >= args.start_val and (game0_is_best or game3_is_best):
-                    self.test_epoch()
+                # if epoch >= args.start_val and (game0_is_best or game3_is_best):
+                #     self.test_epoch()
 
     def train_epoch(self):
         epoch_reg_loss = AverageMeter()
