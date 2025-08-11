@@ -1,4 +1,4 @@
-name: rgbtcc-test
+name: rgbtcc
 channels:
   - pytorch
   - nvidia
