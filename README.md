@@ -2,3 +2,12 @@
 Official implementation of 'TDCount: Making the RGB-T Crowd Counting Thermal-Only'
 
 ![teaser](assets/teaser.png)
+
+## Preparation
+
+**Environment:** Create a virtural environment use Anaconda, and install all dependencies.
+```
+conda env create -f environment.yaml
+```
+**Data:** We conduct experiments over two datasets, you can download and use whichever you would like to test.
+The two dataset could be downloaded at: [RGBTCC](https://lingboliu.com/RGBT_Crowd_Counting.html) | [DroneRGBT](https://github.com/VisDrone/DroneRGBT/releases/download/v1.0/DroneRGBT.zip).
