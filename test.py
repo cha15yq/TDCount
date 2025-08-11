@@ -34,7 +34,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Test')
     parser.add_argument('--pretrained-model-name', default="runwayml/stable-diffusion-v1-5",
                         help='the pretrained name of the diffusion model')
-    parser.add_argument('--control-net-path', default="outputs/checkpoint-24500/controlnet",
+    parser.add_argument('--control-net-path', default="best_RGBTCC/controlnet",
                         help='the path to the pretrained ControlNet')
     parser.add_argument('--lcm-lora-path', default="pytorch_lora_weights.safetensors",
                         help='the path to the pretrained LCM lora')
@@ -43,9 +43,9 @@ def parse_args():
 
     parser.add_argument('--num-steps', default=1, type=int,
                         help='the number of inference steps to the middle part of the diffusion process')
-    parser.add_argument('--pretrained', default='best_model_148/best_model_148.pth',
+    parser.add_argument('--pretrained', default='best_RGBTCC/best_model/best_model_148.pth',
                         help='the path of resume training model')
-    parser.add_argument('--density-unet-path', default='best_model_148/unet_148',
+    parser.add_argument('--density-unet-path', default='best_RGBTCC/best_model/unet_148',
                         help='the path to the pretrained density lora, Must if resume')
 
     parser.add_argument('--batch-size', type=int, default=4,
