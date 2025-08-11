@@ -30,3 +30,4 @@ RGBT-CC
 │  │─depth_rgb/
 │  ...
 ```
+**Pretained Model:** The pretrained model for both datasets and the LCM LoRA are provided [here](https://drive.google.com/drive/folders/11VrKBrJ-cryb4BG9X71zv07sWMtdn-qd?usp=sharing)
