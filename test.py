@@ -43,7 +43,7 @@ def parse_args():
 
     parser.add_argument('--num-steps', default=1, type=int,
                         help='the number of inference steps to the middle part of the diffusion process')
-    parser.add_argument('--resume', default='',
+    parser.add_argument('--pretrained', default='best_model_148/best_model_148.pth',
                         help='the path of resume training model')
     parser.add_argument('--density-unet-path', default='best_model_148/unet_148',
                         help='the path to the pretrained density lora, Must if resume')
@@ -65,7 +65,7 @@ if __name__ == '__main__':
     device = torch.device('cuda')
     model = vgg19(args)
     setup_seed(15)
-    model.load_state_dict(torch.load('best_model_148/best_model_148.pth'))
+    model.load_state_dict(torch.load(args.pretrained))
 
     model.to(device)
     model.depth_feat.pipeline.to(device)
