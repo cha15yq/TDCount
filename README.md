@@ -12,7 +12,7 @@ conda env create -f environment.yaml
 **Data:** We conduct experiments over two datasets, you can download and use whichever you would like to test.
 The two dataset could be downloaded at: [RGBTCC](https://lingboliu.com/RGBT_Crowd_Counting.html) | [DroneRGBT](https://github.com/VisDrone/DroneRGBT/releases/download/v1.0/DroneRGBT.zip).
 
-
+You should run the preprocessing code for both datasets, and you will get a generated folder with a structure like this:
 ```
 RGBT-CC
 ├─train/
