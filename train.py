@@ -15,18 +15,18 @@ def parse_args():
     parser.add_argument('--seed', default=15, type=int,
                         help='seed number')
 
-    parser.add_argument('--lr', type=float, default=5e-5,
+    parser.add_argument('--lr', type=float, default=1e-4,
                         help='the initial learning rate')
     parser.add_argument('--pretrained-model-name', default="runwayml/stable-diffusion-v1-5",
                         help='the pretrained name of the diffusion model')
-    parser.add_argument('--control-net-path', default="outputs/trained/checkpoint-8500/controlnet",
+    parser.add_argument('--control-net-path', default="best_RGBTCC/controlnet",
                         help='the path to the pretrained ControlNet')
     parser.add_argument('--lcm-lora-path', default="pytorch_lora_weights.safetensors",
                         help='the path to the pretrained LCM lora')
 
     parser.add_argument('--num-steps', default=1, type=int,
                         help='the number of inference steps to the middle part of the diffusion process')
-    parser.add_argument('--weight-decay', type=float, default=5e-5,
+    parser.add_argument('--weight-decay', type=float, default=1e-4,
                         help='the weight decay')
     parser.add_argument('--resume', default='',
                         help='the path of resume training model')
@@ -38,10 +38,10 @@ def parse_args():
                         help='max training epoch')
     parser.add_argument('--val-epoch', type=int, default=1,
                         help='the num of steps to log training information')
-    parser.add_argument('--start-val', type=int, default=20,
+    parser.add_argument('--start-val', type=int, default=50,
                         help='the epoch start to val')
 
-    parser.add_argument('--batch-size', type=int, default=4,
+    parser.add_argument('--batch-size', type=int, default=1,
                         help='train batch size')
     parser.add_argument('--device', default='0', help='assign device')
     parser.add_argument('--num-workers', type=int, default=8,
