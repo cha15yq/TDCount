@@ -1,0 +1,24 @@
+name: rgbtcc-test
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy=1.26.4
+  - pip:
+    - torch==2.1.0 --index-url https://download.pytorch.org/whl/cu121
+    - torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
+    - torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
+    - "numpy<2"
+    - opencv-python
+    - h5py
+    - matplotlib
+    - scipy
+    - timm
+    - 'diffusers[torch]'
+    - transformers
+    - tensorboard
+    - peft
+    - git+https://github.com/huggingface/transformers
